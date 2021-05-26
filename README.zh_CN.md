@@ -131,6 +131,27 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 };
 ```
 
+## 配置
+
+### entry
+
+**type:** `string`
+**require:**
+
+必须提供
+
+### localEnabled
+
+**type:** `boolean`
+
+**default:** `false`
+
+### enabled
+
+**type:** `boolean`
+
+**default:** `true`
+
 ## 示例项目
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
