@@ -1,13 +1,3 @@
-(async () => {
-  try {
-    await import('vconsole');
-  } catch (e) {
-    throw new Error(
-      'vite-plugin-vconsole requires vconsole to be present in the dependency tree.\n vite-plugin-vconsole 需要在项目安装vconsole依赖包哟～'
-    );
-  }
-})();
-
 import type { viteVConsoleOptions } from './types';
 import type { Plugin } from 'vite';
 
