@@ -763,6 +763,16 @@ conventional-commits-parser@^3.0.0, conventional-commits-parser@^3.2.0:
     through2 "^4.0.0"
     trim-off-newlines "^1.0.0"
 
+copy-text-to-clipboard@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/copy-text-to-clipboard/-/copy-text-to-clipboard-3.0.1.tgz#8cbf8f90e0a47f12e4a24743736265d157bce69c"
+  integrity sha512-rvVsHrpFcL4F2P8ihsoLdFHmd404+CMg71S756oRSeQgqk51U3kicGdnvfkrxva0xXH92SjGS62B0XIJsbh+9Q==
+
+core-js@^3.11.0:
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
+  integrity sha512-Ne9DKPHTObRuB09Dru5AjwKjY4cJHVGu+y5f7coGn1E9Grkc3p2iBwE9AI/nJzsE29mQF7oq+mhYYRqOMFN1Bw==
+
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -1848,6 +1858,11 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+mutation-observer@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/mutation-observer/-/mutation-observer-1.0.3.tgz#42e9222b101bca82e5ba9d5a7acf4a14c0f263d0"
+  integrity sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA==
+
 mz@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/mz/-/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"
@@ -2842,6 +2857,15 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+vconsole@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/vconsole/-/vconsole-3.6.1.tgz#4a85c3cb072c0f567e065baf88e803c607844aad"
+  integrity sha512-n6dDSK9JTiGLPUOKZMxM26BqbpHJLNOrsABWNBpMhMcNt6fvE485QffHm9cP4Pd2P1RzNXO8AZ6rl1+YtfHHXw==
+  dependencies:
+    copy-text-to-clipboard "^3.0.1"
+    core-js "^3.11.0"
+    mutation-observer "^1.0.3"
 
 vite@^2.3.3:
   version "2.3.4"
