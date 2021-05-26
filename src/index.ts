@@ -3,7 +3,7 @@
     await import('vconsole');
   } catch (e) {
     throw new Error(
-      'vite-plugin-vconsole requires vconsole to be present in the dependency tree.'
+      'vite-plugin-vconsole requires vconsole to be present in the dependency tree.\n vite-plugin-vconsole 需要在项目安装vconsole依赖包哟～'
     );
   }
 })();
@@ -14,30 +14,30 @@ import type { Plugin } from 'vite';
 import { ResolvedConfig } from 'vite';
 
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
-  console.log(opt);
-
-  let config: ResolvedConfig;
+  let viteConfig: ResolvedConfig;
+  let isDev = false;
+  const { entry, enabled = true, localEnabled = false, config = {} } = opt;
 
   return {
     name: 'vite:vconsole',
     enforce: 'pre',
     configResolved(resolvedConfig) {
-      config = resolvedConfig;
-      console.log(config);
+      viteConfig = resolvedConfig;
+      isDev = viteConfig.command === 'serve';
     },
-    // transformIndexHtml(html) {
-    //   return html.replace(
-    //     /<\/body>/,
-    //     `<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script><script>;new window.VConsole();</script></body>`
-    //   )
-    // },
     transform(_source: string, id: string) {
-      if (id === opt.entry) {
-        console.log(_source);
-        console.log(this);
-        return _source + `import VConsole from 'vconsole';new VConsole();`;
+      if (id === entry && localEnabled && isDev) {
+        // serve dev
+        return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+          config
+        )});`;
       }
-      console.log(id);
+      if (id === entry && enabled && !isDev) {
+        // build prod
+        return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+          config
+        )});`;
+      }
       return _source;
     }
   };
