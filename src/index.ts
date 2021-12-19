@@ -8,6 +8,10 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
   let isDev = false;
   const { entry, enabled = true, localEnabled = false, config = {} } = opt;
 
+  // Compatible to solve the windows path problem
+  let entryPath = entry;
+  if (process.platform === 'win32') entryPath = entry.replace(/\\/g, '/');
+
   return {
     name: 'vite:vconsole',
     enforce: 'pre',
@@ -16,13 +20,13 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
       isDev = viteConfig.command === 'serve';
     },
     transform(_source: string, id: string) {
-      if (id === entry && localEnabled && isDev) {
+      if (id === entryPath && localEnabled && isDev) {
         // serve dev
         return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
           config
         )});`;
       }
-      if (id === entry && enabled && !isDev) {
+      if (id === entryPath && enabled && !isDev) {
         // build prod
         return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
           config

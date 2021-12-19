@@ -173,6 +173,10 @@ must support.
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
 
+## Compatible to solve the windows path problem
+
+Now you can use it normally in windows
+
 ## License
 
 [MIT](LICENSE)

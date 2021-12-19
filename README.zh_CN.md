@@ -156,6 +156,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
 
+## 兼容解决windows路径问题
+
+现在你可以在windows正常使用啦。
+
 ## License
 
 [MIT](LICENSE)
