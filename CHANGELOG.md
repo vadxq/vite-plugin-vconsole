@@ -1,5 +1,12 @@
+## <small>1.1.1 (2021-12-19)</small>
+
+* fix(path): solve the windows path problem ([a867a0d](https://github.com/vadxq/vite-plugin-vconsole/commit/a867a0d))
+
+
+
 ## 1.1.0 (2021-05-26)
 
+* release(1.1.0): vite-plugin-vconsole v1.1.0 ([9b880cc](https://github.com/vadxq/vite-plugin-vconsole/commit/9b880cc))
 * fix(package): fix package main url error ([c9965c0](https://github.com/vadxq/vite-plugin-vconsole/commit/c9965c0))
 
 
