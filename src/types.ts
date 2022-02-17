@@ -1,5 +1,5 @@
 export interface viteVConsoleOptions {
-  entry: string; // entry file
+  entry: string[] | string; // entry file
   localEnabled?: boolean; // serve dev enabled
   enabled?: boolean; // enabled
   config?: voption; // vconsole option

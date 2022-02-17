@@ -67,7 +67,7 @@ export default defineConfig({
   plugins: [
     vue(),
     viteVConsole({
-      entry: path.resolve('src/main.ts'),
+      entry: [path.resolve('src/main.ts')],
       localEnabled: true,
       enabled: true,
       config: {
@@ -118,7 +118,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     plugins: [
       vue(),
       viteVConsole({
-        entry: path.resolve('src/main.ts'), // 入口文件
+        entry: [path.resolve('src/main.ts')], // 入口文件
         localEnabled: command === 'serve', // serve开发环境下
         enabled: command !== 'serve' || mode === 'test', // 打包环境下/发布测试包
         config: { // vconsole 配置项
@@ -135,10 +135,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 ### entry
 
-**type:** `string`
+**type:** `string | string[]`
 **require:**
 
-必须提供
+必须提供，支持多入口。
 
 ### localEnabled
 
