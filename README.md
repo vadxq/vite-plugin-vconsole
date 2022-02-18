@@ -65,7 +65,7 @@ export default defineConfig({
   plugins: [
     vue(),
     viteVConsole({
-      entry: path.resolve('src/main.ts'),
+      entry: [path.resolve('src/main.ts')],
       localEnabled: true,
       enabled: true,
       config: {
@@ -117,7 +117,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     plugins: [
       vue(),
       viteVConsole({
-        entry: path.resolve('src/main.ts'), // entry file
+        entry: [path.resolve('src/main.ts')], // entry file
         localEnabled: command === 'serve', // dev environment
         enabled: command !== 'serve' || mode === 'test', // build production
         config: { // vconsole options
@@ -134,7 +134,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 ```ts
 {
-  entry: string; // entry file require
+  entry: string | string[]; // entry file require
   localEnabled?: boolean;
   enabled?: boolean;
   config?: { // vconsole options
@@ -152,10 +152,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 ### entry
 
-**type:** `string`
+**type:** `string | string[]`
 **require:**
 
-must support.
+must support. Supports multiple entries when it is an array.
 
 ### localEnabled
 

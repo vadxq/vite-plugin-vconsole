@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     viteVConsole({
-      entry: path.resolve('src/main.ts'),
+      entry: [path.resolve('src/main.ts'), path.resolve('nested/main.ts')],
       localEnabled: true,
       enabled: true,
       config: {
@@ -16,5 +16,13 @@ export default defineConfig({
         theme: 'light'
       }
     })
-  ]
+  ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        nested: path.resolve(__dirname, 'nested/index.html')
+      }
+    }
+  }
 });
