@@ -5,6 +5,7 @@
 [![](https://img.shields.io/npm/dt/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 
 > vite2 plugin for vconsole
+>
 > A plug-in for Vite2 that helps developers easily use the functions of VConsole in various environments.
 
 **English** | [中文](./README.zh_CN.md)

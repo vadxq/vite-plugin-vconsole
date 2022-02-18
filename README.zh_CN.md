@@ -5,6 +5,7 @@
 [![](https://img.shields.io/npm/dt/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 
 > vite2 plugin for vconsole
+>
 > 一个适用于Vite2的插件，帮助开发者在各个环境下方便使用VConsole的功能。可以方便配置区分环境，根据环境动态加载VConsole，支持多页面配置。
 
 **中文** | [English](./README.md)

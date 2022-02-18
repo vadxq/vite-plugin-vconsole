@@ -1,5 +1,13 @@
+## 1.2.0 (2022-02-18)
+
+* docs: update readme ([ed82d56](https://github.com/vadxq/vite-plugin-vconsole/commit/ed82d56))
+* feat: support multi entry ([b595b63](https://github.com/vadxq/vite-plugin-vconsole/commit/b595b63))
+
+
+
 ## <small>1.1.1 (2021-12-19)</small>
 
+* release(1.1.1): v1.1.1 ([938542e](https://github.com/vadxq/vite-plugin-vconsole/commit/938542e))
 * fix(path): solve the windows path problem ([a867a0d](https://github.com/vadxq/vite-plugin-vconsole/commit/a867a0d))
 
 
