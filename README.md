@@ -5,6 +5,7 @@
 [![](https://img.shields.io/npm/dt/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 
 > vite2 plugin for vconsole
+> A plug-in for Vite2 that helps developers easily use the functions of VConsole in various environments.
 
 **English** | [中文](./README.zh_CN.md)
 
@@ -65,7 +66,32 @@ export default defineConfig({
   plugins: [
     vue(),
     viteVConsole({
-      entry: [path.resolve('src/main.ts')],
+      entry: path.resolve('src/main.ts'), // or you can use entry: [path.resolve('src/main.ts')]
+      localEnabled: true,
+      enabled: true,
+      config: {
+        maxLogNumber: 1000,
+        theme: 'dark'
+      }
+    })
+  ]
+});
+```
+
+- **Vue** sample config for multi pages
+
+```ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { viteVConsole } from 'vite-plugin-vconsole';
+import * as path from 'path'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    viteVConsole({
+      entry: [path.resolve('src/main.ts')], // entry for each page, different from the above
       localEnabled: true,
       enabled: true,
       config: {
@@ -173,9 +199,15 @@ must support. Supports multiple entries when it is an array.
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
 
-## Compatible to solve the windows path problem
+## Compatible to solve the Windows path problem
 
-Now you can use it normally in windows
+Update to V1.1.1+ version, Now you can use it normally in Windows.
+
+## Support multi-page configuration
+
+Update to V1.2.0+ version, can support multi-page configuration.
+
+Many thanks to [@AfireHong](https://github.com/AfireHong) for support!
 
 ## License
 
