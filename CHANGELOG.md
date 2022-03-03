@@ -1,5 +1,12 @@
+## <small>1.2.1 (2022-03-03)</small>
+
+* fix(misslog): fix missing logs and fix eslint ignore ([595dfbc](https://github.com/vadxq/vite-plugin-vconsole/commit/595dfbc))
+
+
+
 ## 1.2.0 (2022-02-18)
 
+* release: v1.2.0 ([1e80720](https://github.com/vadxq/vite-plugin-vconsole/commit/1e80720))
 * docs: update readme ([ed82d56](https://github.com/vadxq/vite-plugin-vconsole/commit/ed82d56))
 * feat: support multi entry ([b595b63](https://github.com/vadxq/vite-plugin-vconsole/commit/b595b63))
 
