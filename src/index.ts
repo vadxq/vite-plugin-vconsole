@@ -23,15 +23,15 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
     transform(_source: string, id: string) {
       if (entryPath.includes(id) && localEnabled && isDev) {
         // serve dev
-        return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+        return `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
           config
-        )});`;
+        )});/* eslint-enable */${_source}`;
       }
       if (entryPath.includes(id) && enabled && !isDev) {
         // build prod
-        return `${_source};import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+        return `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
           config
-        )});`;
+        )});/* eslint-enable */${_source}`;
       }
       return _source;
     }
