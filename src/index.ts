@@ -23,17 +23,26 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
     transform(_source: string, id: string) {
       if (entryPath.includes(id) && localEnabled && isDev) {
         // serve dev
-        return `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
-          config
-        )});/* eslint-enable */${_source}`;
+        return {
+          code: `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+            config
+          )});/* eslint-enable */${_source}`,
+          map: null // support source map
+        };
       }
       if (entryPath.includes(id) && enabled && !isDev) {
         // build prod
-        return `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
-          config
-        )});/* eslint-enable */${_source}`;
+        return {
+          code: `/* eslint-disable */;import VConsole from 'vconsole';new VConsole(${JSON.stringify(
+            config
+          )});/* eslint-enable */${_source}`,
+          map: null // support source map
+        };
       }
-      return _source;
+      return {
+        code: _source,
+        map: null // support source map
+      };
     }
   };
 }
