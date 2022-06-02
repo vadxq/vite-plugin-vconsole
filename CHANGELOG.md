@@ -1,5 +1,12 @@
+## <small>1.2.2 (2022-06-02)</small>
+
+* fix(map): generate a sourcemap for the transformation ([3171a06](https://github.com/vadxq/vite-plugin-vconsole/commit/3171a06))
+
+
+
 ## <small>1.2.1 (2022-03-03)</small>
 
+* release: v1.2.1 ([e65c7d7](https://github.com/vadxq/vite-plugin-vconsole/commit/e65c7d7))
 * fix(misslog): fix missing logs and fix eslint ignore ([595dfbc](https://github.com/vadxq/vite-plugin-vconsole/commit/595dfbc))
 
 
