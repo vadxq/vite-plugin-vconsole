@@ -1,5 +1,16 @@
+## 1.3.0 (2022-10-19)
+
+* docs: update readme ([8c5e3f2](https://github.com/vadxq/vite-plugin-vconsole/commit/8c5e3f2))
+* chore: add playground ([dc94dc6](https://github.com/vadxq/vite-plugin-vconsole/commit/dc94dc6))
+* chore: update dependencies ([ae5d819](https://github.com/vadxq/vite-plugin-vconsole/commit/ae5d819))
+* chore: use vconsole type ([13f757a](https://github.com/vadxq/vite-plugin-vconsole/commit/13f757a))
+* fix: cover vconsole options ([68fed2c](https://github.com/vadxq/vite-plugin-vconsole/commit/68fed2c)), closes [#6](https://github.com/vadxq/vite-plugin-vconsole/issues/6)
+
+
+
 ## <small>1.2.2 (2022-06-02)</small>
 
+* release: v1.2.2 ([5a571c8](https://github.com/vadxq/vite-plugin-vconsole/commit/5a571c8))
 * fix(map): generate a sourcemap for the transformation ([3171a06](https://github.com/vadxq/vite-plugin-vconsole/commit/3171a06))
 
 

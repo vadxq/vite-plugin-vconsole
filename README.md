@@ -4,9 +4,9 @@
 [![](https://img.shields.io/npm/l/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 [![](https://img.shields.io/npm/dt/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 
-> vite2 plugin for vconsole
+> vite plugin for vconsole
 >
-> A plug-in for Vite2 that helps developers easily use the functions of VConsole in various environments.
+> A plug-in for Vite2+ that helps developers easily use the functions of VConsole in various environments.
 
 **English** | [中文](./README.zh_CN.md)
 
@@ -191,6 +191,14 @@ must support. Supports multiple entries when it is an array.
 
 **default:** `true`
 
+## Typescript
+
+Add a reference to `vconsole`
+
+```ts
+/// <reference types="vconsole" />
+```
+
 ## Sample project
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
@@ -205,12 +213,11 @@ Update to V1.2.0+ version, can support multi-page configuration.
 
 Many thanks to [@AfireHong](https://github.com/AfireHong) for support!
 
-## Typescript
+## Support VConsole Functions Configuration
 
-Add a reference to `vconsole`
-```ts
-/// <reference types="vconsole" />
-```
+Update to V1.3.0+ version, can support VConsole Functions Configuration.
+
+Many thanks to [@KeJunMao](https://github.com/KeJunMao) for support!
 
 ## License
 

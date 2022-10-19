@@ -4,9 +4,9 @@
 [![](https://img.shields.io/npm/l/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 [![](https://img.shields.io/npm/dt/vite-plugin-vconsole.svg?style=flat-square)](https://www.npmjs.com/package/vite-plugin-vconsole)
 
-> vite2 plugin for vconsole
+> vite plugin for vconsole
 >
-> 一个适用于Vite2的插件，帮助开发者在各个环境下方便使用VConsole的功能。可以方便配置区分环境，根据环境动态加载VConsole，支持多页面配置。
+> 一个适用于Vite2+的插件，帮助开发者在各个环境下方便使用VConsole的功能。可以方便配置区分环境，根据环境动态加载VConsole，支持多页面配置。
 
 **中文** | [English](./README.md)
 
@@ -179,6 +179,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 **default:** `true`
 
+## Typescript
+
+添加 `vconsole` 的引用
+
+```ts
+/// <reference types="vconsole" />
+```
+
 ## 示例项目
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
@@ -193,12 +201,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 非常感谢[@AfireHong](https://github.com/AfireHong)的支持！
 
-## Typescript
+## 支持VConsole函数配置
 
-添加 `vconsole` 的引用
-```ts
-/// <reference types="vconsole" />
-```
+更新至V1.3.0+版本，可以VConsole函数配置啦～
+
+非常感谢[@KeJunMao](https://github.com/KeJunMao)的支持！
 
 ## License
 
