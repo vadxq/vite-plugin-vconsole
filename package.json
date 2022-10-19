@@ -3,6 +3,13 @@
   "version": "1.2.2",
   "description": "vite plugin vconsole",
   "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
   "files": [
     "dist"
   ],
