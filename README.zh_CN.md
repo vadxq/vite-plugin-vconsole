@@ -193,6 +193,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 非常感谢[@AfireHong](https://github.com/AfireHong)的支持！
 
+## Typescript
+
+添加 `vconsole` 的引用
+```ts
+/// <reference types="vconsole" />
+```
+
 ## License
 
 [MIT](LICENSE)

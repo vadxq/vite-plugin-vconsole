@@ -1,5 +1,5 @@
 /// <reference types="vconsole" />
-import { VConsoleOptions } from 'core/options.interface';
+import type { VConsoleOptions } from 'core/options.interface';
 
 export interface viteVConsoleOptions {
   entry: string[] | string; // entry file

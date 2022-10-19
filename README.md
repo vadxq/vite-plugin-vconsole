@@ -160,18 +160,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 ### viteVConsole Options
 
 ```ts
+/// <reference types="vconsole" />
+
 {
   entry: string | string[]; // entry file require
   localEnabled?: boolean;
   enabled?: boolean;
-  config?: { // vconsole options
-    defaultPlugins?: string[];
-    onReady?: () => void;
-    onClearLog?: () => void;
-    maxLogNumber?: number;
-    disableLogScrolling?: boolean;
-    theme?: 'light' | 'dark';
-  };
+  config?: VConsoleOptions
 }
 ```
 
@@ -209,6 +204,13 @@ Update to V1.1.1+ version, Now you can use it normally in Windows.
 Update to V1.2.0+ version, can support multi-page configuration.
 
 Many thanks to [@AfireHong](https://github.com/AfireHong) for support!
+
+## Typescript
+
+Add a reference to `vconsole`
+```ts
+/// <reference types="vconsole" />
+```
 
 ## License
 
