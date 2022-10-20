@@ -1,5 +1,12 @@
+## <small>1.3.1 (2022-10-20)</small>
+
+* fix: cjs not found ([c666ca9](https://github.com/vadxq/vite-plugin-vconsole/commit/c666ca9))
+
+
+
 ## 1.3.0 (2022-10-19)
 
+* release: v1.3.0 ([c99995c](https://github.com/vadxq/vite-plugin-vconsole/commit/c99995c))
 * docs: update readme ([8c5e3f2](https://github.com/vadxq/vite-plugin-vconsole/commit/8c5e3f2))
 * chore: add playground ([dc94dc6](https://github.com/vadxq/vite-plugin-vconsole/commit/dc94dc6))
 * chore: update dependencies ([ae5d819](https://github.com/vadxq/vite-plugin-vconsole/commit/ae5d819))

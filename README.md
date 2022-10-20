@@ -6,7 +6,7 @@
 
 > vite plugin for vconsole
 >
-> A plug-in for Vite2+ that helps developers easily use the functions of VConsole in various environments.
+> A plugin for Vite2+ that helps developers easily use the functions of VConsole in various environments.
 
 **English** | [中文](./README.zh_CN.md)
 
