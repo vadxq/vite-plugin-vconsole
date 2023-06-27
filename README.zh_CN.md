@@ -6,7 +6,7 @@
 
 > vite plugin for vconsole
 >
-> 一个适用于Vite2+的插件，帮助开发者在各个环境下方便使用VConsole的功能。可以方便配置区分环境，根据环境动态加载VConsole，支持多页面配置。
+> 一个适用于 Vite v2+的插件，帮助开发者在各个环境下方便使用VConsole的功能。可以方便配置区分环境，根据环境动态加载VConsole，支持多页面配置。
 
 **中文** | [English](./README.md)
 
@@ -70,8 +70,7 @@ export default defineConfig({
     vue(),
     viteVConsole({
       entry: path.resolve('src/main.ts'), // 或者可以使用这个配置: [path.resolve('src/main.ts')]
-      localEnabled: true,
-      enabled: true,
+      enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
         maxLogNumber: 1000,
         theme: 'dark'
@@ -95,8 +94,7 @@ export default defineConfig({
     vue(),
     viteVConsole({
       entry: [path.resolve('src/main.ts')], // 每个页面的入口文件，和上面不一样的地方，这里是一个数组
-      localEnabled: true,
-      enabled: true,
+      enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
         maxLogNumber: 1000,
         theme: 'dark'
@@ -120,8 +118,7 @@ export default defineConfig({
     reactRefresh(),
     viteVConsole({
       entry: path.resolve('src/main.tsx'),
-      localEnabled: true,
-      enabled: true,
+      enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
         maxLogNumber: 1000,
         theme: 'dark'
@@ -146,7 +143,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vue(),
       viteVConsole({
         entry: [path.resolve('src/main.ts')], // 入口文件
-        localEnabled: command === 'serve', // serve开发环境下
         enabled: command !== 'serve' || mode === 'test', // 打包环境下/发布测试包
         config: { // vconsole 配置项
           maxLogNumber: 1000，
@@ -158,6 +154,59 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 };
 ```
 
+- 自定义vConsole插件
+
+```javascript
+viteVConsole({
+  entry: path.resolve('src/main.ts'),
+  enabled: true,
+  config: {
+    theme: 'dark',
+    onReady() {
+      console.log(23333);
+    }
+  },
+  plugin: [
+    {
+      id: 'my_plugin',
+      name: 'MyPlugin',
+      event: [
+        {
+          eventName: 'init',
+          callback: function () {
+            console.log('My plugin init');
+          }
+        },
+        {
+          eventName: 'renderTab',
+          callback: function () {
+            console.log('My plugin renderTab');
+          }
+        }
+      ]
+    },
+    {
+      id: 'my_plugin2',
+      name: 'MyPlugin2',
+      event: [
+        {
+          eventName: 'init',
+          callback: function () {
+            console.log('My plugin2 init');
+          }
+        },
+        {
+          eventName: 'renderTab',
+          callback: function () {
+            console.log('My plugin2 renderTab');
+          }
+        }
+      ]
+    }
+  ]
+})
+```
+
 ## 配置
 
 ### entry
@@ -167,17 +216,30 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 必须提供，支持多入口。
 
-### localEnabled
-
-**type:** `boolean`
-
-**default:** `false`
-
 ### enabled
 
 **type:** `boolean`
 
 **default:** `true`
+
+### config
+
+**type:**: `VConsoleOptions`
+
+### plugin
+
+**type:**
+
+```type
+{
+  id: string;
+  name: string;
+  event: {
+    eventName: string;
+    callback: (data?: any) => void;
+  }[]
+}[]
+```
 
 ## Typescript
 
@@ -206,6 +268,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 更新至V1.3.0+版本，可以VConsole函数配置啦～
 
 非常感谢[@KeJunMao](https://github.com/KeJunMao)的支持！
+
+## 支持VConsole自定义插件和配置参数调整
+
+更新至V2.0.0+版本，可以配置VConsole定义插件啦～
 
 ## License
 

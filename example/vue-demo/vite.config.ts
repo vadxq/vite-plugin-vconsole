@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { viteVConsole } from '../../src/main';
+import viteVConsole from '../../src/main';
 import * as path from 'path';
 
 // https://vitejs.dev/config/

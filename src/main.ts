@@ -1,8 +1,6 @@
 import type { viteVConsoleOptions } from './types';
 import type { Plugin } from 'vite';
 
-// import { ResolvedConfig } from 'vite';
-
 const parseVConsoleOptions = (config: Record<string, unknown>) =>
   Object.keys(config).reduce((code, key) => {
     const value = config[key];
@@ -22,13 +20,13 @@ const parseVConsoleOptions = (config: Record<string, unknown>) =>
 const getEventItems = (
   event: {
     eventName: string;
-    callback: string;
+    callback: (data?: any) => void;
   }[],
   id: string
 ) => {
   return event
     .map(
-      (ele: { eventName: string; callback: string }) => `
+      (ele: { eventName: string; callback: (data?: any) => void }) => `
     ${id}.on('${ele.eventName}', ${ele.callback})
     `
     )
@@ -36,7 +34,6 @@ const getEventItems = (
 };
 
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
-  // let viteConfig: ResolvedConfig;
   const { entry, enabled = true, config = {}, plugin } = opt;
 
   // Compatible to solve the windows path problem
@@ -86,3 +83,5 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
 }
 
 export * from './types';
+
+export default viteVConsole;

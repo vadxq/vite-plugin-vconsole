@@ -6,7 +6,7 @@
 
 > vite plugin for vconsole
 >
-> A plugin for Vite2+ that helps developers easily use the functions of VConsole in various environments.
+> A plugin for Vite v2+ that helps developers easily use the functions of VConsole in various environments.
 
 **English** | [中文](./README.zh_CN.md)
 
@@ -68,7 +68,6 @@ export default defineConfig({
     vue(),
     viteVConsole({
       entry: path.resolve('src/main.ts'), // or you can use entry: [path.resolve('src/main.ts')]
-      localEnabled: true,
       enabled: true,
       config: {
         maxLogNumber: 1000,
@@ -93,7 +92,6 @@ export default defineConfig({
     vue(),
     viteVConsole({
       entry: [path.resolve('src/main.ts')], // entry for each page, different from the above
-      localEnabled: true,
       enabled: true,
       config: {
         maxLogNumber: 1000,
@@ -118,7 +116,6 @@ export default defineConfig({
     reactRefresh(),
     viteVConsole({
       entry: path.resolve('src/main.tsx'),
-      localEnabled: true,
       enabled: true,
       config: {
         maxLogNumber: 1000,
@@ -145,7 +142,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vue(),
       viteVConsole({
         entry: [path.resolve('src/main.ts')], // entry file
-        localEnabled: command === 'serve', // dev environment
         enabled: command !== 'serve' || mode === 'test', // build production
         config: { // vconsole options
           maxLogNumber: 1000，
@@ -157,6 +153,59 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 };
 ```
 
+- vConsole plugin config
+
+```javascript
+viteVConsole({
+  entry: path.resolve('src/main.ts'),
+  enabled: true,
+  config: {
+    theme: 'dark',
+    onReady() {
+      console.log(23333);
+    }
+  },
+  plugin: [
+    {
+      id: 'my_plugin',
+      name: 'MyPlugin',
+      event: [
+        {
+          eventName: 'init',
+          callback: function () {
+            console.log('My plugin init');
+          }
+        },
+        {
+          eventName: 'renderTab',
+          callback: function () {
+            console.log('My plugin renderTab');
+          }
+        }
+      ]
+    },
+    {
+      id: 'my_plugin2',
+      name: 'MyPlugin2',
+      event: [
+        {
+          eventName: 'init',
+          callback: function () {
+            console.log('My plugin2 init');
+          }
+        },
+        {
+          eventName: 'renderTab',
+          callback: function () {
+            console.log('My plugin2 renderTab');
+          }
+        }
+      ]
+    }
+  ]
+})
+```
+
 ### viteVConsole Options
 
 ```ts
@@ -164,9 +213,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 {
   entry: string | string[]; // entry file require
-  localEnabled?: boolean;
   enabled?: boolean;
   config?: VConsoleOptions
+  plugin?: {
+    id: string;
+    name: string;
+    event: {
+      eventName: string;
+      callback: (data?: any) => void;
+    }[]
+  }[]
 }
 ```
 
@@ -179,17 +235,30 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
 must support. Supports multiple entries when it is an array.
 
-### localEnabled
-
-**type:** `boolean`
-
-**default:** `false`
-
 ### enabled
 
 **type:** `boolean`
 
 **default:** `true`
+
+### config
+
+**type:**: `VConsoleOptions`
+
+### plugin
+
+**type:**
+
+```type
+{
+  id: string;
+  name: string;
+  event: {
+    eventName: string;
+    callback: (data?: any) => void;
+  }[]
+}[]
+```
 
 ## Typescript
 
@@ -218,6 +287,10 @@ Many thanks to [@AfireHong](https://github.com/AfireHong) for support!
 Update to V1.3.0+ version, can support VConsole Functions Configuration.
 
 Many thanks to [@KeJunMao](https://github.com/KeJunMao) for support!
+
+## Support VConsole Plugin Configuration
+
+Update to V2.0.0+ version, can support VConsole Plugin Configuration.
 
 ## License
 
