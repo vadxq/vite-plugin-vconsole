@@ -6,4 +6,5 @@ export interface viteVConsoleOptions {
   localEnabled?: boolean; // serve dev enabled
   enabled?: boolean; // enabled
   config?: VConsoleOptions; // vconsole option
+  plugin?: any[];
 }
