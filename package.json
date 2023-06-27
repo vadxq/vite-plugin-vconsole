@@ -14,12 +14,13 @@
     "dist"
   ],
   "scripts": {
-    "clean": "rimraf dist",
-    "dev": "tsup src/index.ts --dts --format cjs,esm --watch",
-    "build": "npm run clean && tsup src/index.ts --dts --format cjs,esm",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepare": "husky install",
     "log": "npx conventional-changelog --config ./node_modules/@commitlint/cli -i CHANGELOG.md -s -r 0",
-    "lint": "npx lint-staged"
+    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
+    "lint:pretty": "pretty-quick --staged",
+    "preinstall": "npx only-allow pnpm"
   },
   "repository": {
     "type": "git",
@@ -36,23 +37,23 @@
   },
   "homepage": "https://github.com/vadxq/vite-plugin-vconsole#readme",
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "@types/node": "^15.14.9",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "conventional-changelog-cli": "^2.2.2",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.2.6",
-    "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
-    "tsup": "^4.14.0",
-    "typescript": "^4.8.4",
-    "vconsole": "^3.14.7",
-    "vite": "^2.9.15"
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@types/node": "^20.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "conventional-changelog-cli": "^3.0.0",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "pretty-quick": "^3.1.3",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.3",
+    "vconsole": "^3.15.1",
+    "vite": "^4.3.9"
   },
   "eslintConfig": {
     "root": true,
@@ -80,16 +81,5 @@
       "no-debugger": "off",
       "no-console": "off"
     }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.md": "prettier -w",
-    "*.{ts,js}": "eslint --fix",
-    "*": "prettier -w -u"
   }
 }

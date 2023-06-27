@@ -1,7 +1,7 @@
 import type { viteVConsoleOptions } from './types';
 import type { Plugin } from 'vite';
 
-import { ResolvedConfig } from 'vite';
+// import { ResolvedConfig } from 'vite';
 
 const parseVConsoleOptions = (config: Record<string, unknown>) =>
   Object.keys(config).reduce((code, key) => {
@@ -19,29 +19,59 @@ const parseVConsoleOptions = (config: Record<string, unknown>) =>
     return code;
   }, '');
 
+const getEventItems = (
+  event: {
+    eventName: string;
+    callback: string;
+  }[],
+  id: string
+) => {
+  return event
+    .map(
+      (ele: { eventName: string; callback: string }) => `
+    ${id}.on('${ele.eventName}', ${ele.callback})
+    `
+    )
+    .join(';');
+};
+
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
-  let viteConfig: ResolvedConfig;
-  let isDev = false;
-  const { entry, enabled = true, localEnabled = false, config = {} } = opt;
+  // let viteConfig: ResolvedConfig;
+  const { entry, enabled = true, config = {}, plugin } = opt;
 
   // Compatible to solve the windows path problem
   let entryPath = Array.isArray(entry) ? entry : [entry];
   if (process.platform === 'win32')
     entryPath = entryPath.map((item) => item.replace(/\\/g, '/'));
 
+  // let user to controll by mode and command, like: https://vitejs.dev/config/
+  const enabledTruly = enabled;
   return {
     name: 'vite:vconsole',
     enforce: 'pre',
-    configResolved(resolvedConfig) {
-      viteConfig = resolvedConfig;
-      isDev = viteConfig.command === 'serve';
-    },
     transform(_source: string, id: string) {
-      const enabledTruly = (localEnabled && isDev) || (enabled && !isDev);
       if (entryPath.includes(id) && enabledTruly) {
-        const code = `/* eslint-disable */;import VConsole from 'vconsole';new VConsole({${parseVConsoleOptions(
+        let plugins = '';
+        if (plugin && plugin.length) {
+          plugins = plugin
+            .map(
+              (e) => `
+          const ${e.id} = new VConsole.VConsolePlugin('${e.id}', '${e.name}');
+          ${getEventItems(e.event, e.id)}
+          vConsole.addPlugin(${e.id})
+          `
+            )
+            .join(';');
+        }
+        const code = `/* eslint-disable */;
+        import VConsole from 'vconsole';
+        const vConsole = new VConsole({${parseVConsoleOptions(
           config as Record<string, unknown>
-        )}});/* eslint-enable */${_source}`;
+        )}});
+        window.vConsole = vConsole;
+        ${plugins}
+        /* eslint-enable */${_source}`;
+
         return {
           code,
           map: null // support source map
