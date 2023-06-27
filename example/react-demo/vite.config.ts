@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import { viteVConsole } from '../../src';
+import { viteVConsole } from '../../src/main';
 import * as path from 'path';
 
 // https://vitejs.dev/config/
