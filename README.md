@@ -17,15 +17,17 @@
 **vite version:** >=2.0.0
 
 ```bash
-yarn add vconsole
-# or
-npm i  vconsole -S
-```
-
-```bash
-yarn add vite-plugin-vconsole -D
-# or
+# npm
 npm i vite-plugin-vconsole -D
+npm i  vconsole -S
+
+# yarn
+yarn add vconsole
+yarn add vite-plugin-vconsole -D
+
+# pnpm
+pnpm add vconsole
+pnpm add -D vite-plugin-vconsole
 ```
 
 ## Example
@@ -57,6 +59,7 @@ yarn dev
 - **Vue** sample config
 
 ```ts
+// tips: If the reference path hint does not exist, you can import the @types/node package
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { viteVConsole } from 'vite-plugin-vconsole';
@@ -226,6 +229,23 @@ viteVConsole({
 }
 ```
 
+- A custom rule that triggers destruction, see the question request: [How to judge page userAgent to choose whether to load vconsole](https://github.com/vadxq/vite-plugin-vconsole/issues/12)
+
+```javascript
+// customHide: A piece of executable code, used to start some APIs on the browser side.
+viteVConsole({
+  entry: path.resolve('src/main.ts'),
+  enabled: true,
+  customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
+  config: {
+    theme: 'dark',
+    onReady() {
+      console.log(23333);
+    }
+  },
+})
+```
+
 ## Options
 
 ### entry
@@ -260,6 +280,10 @@ must support. Supports multiple entries when it is an array.
 }[]
 ```
 
+### customHide
+
+**type:**: String
+
 ## Typescript
 
 Add a reference to `vconsole`
@@ -288,9 +312,9 @@ Update to V1.3.0+ version, can support VConsole Functions Configuration.
 
 Many thanks to [@KeJunMao](https://github.com/KeJunMao) for support!
 
-## Support VConsole Plugin Configuration
+## Support VConsole Plugin Configuration.Support custom destruction
 
-Update to V2.0.0+ version, can support VConsole Plugin Configuration.
+Update to V2.0.0+ version, can support VConsole Plugin Configuration.Also supports custom destruction.
 
 ## License
 

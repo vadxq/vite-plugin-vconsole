@@ -17,15 +17,17 @@
 **vite version:** >=2.0.0
 
 ```bash
-yarn add vconsole
-# or
-npm i  vconsole -S
-```
-
-```bash
-yarn add vite-plugin-vconsole -D
-# or
+# npm
 npm i vite-plugin-vconsole -D
+npm i  vconsole -S
+
+# yarn
+yarn add vconsole
+yarn add vite-plugin-vconsole -D
+
+# pnpm
+pnpm add vconsole
+pnpm add -D vite-plugin-vconsole
 ```
 
 ## 示例
@@ -59,6 +61,7 @@ yarn dev
 - **Vue** 简单配置
 
 ```ts
+// tips: 如果引用path提示不存在，可以引入@types/node包
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { viteVConsole } from 'vite-plugin-vconsole';
@@ -207,6 +210,23 @@ viteVConsole({
 })
 ```
 
+- 自定义规则使其触发销毁，见issue需求：[如何判断页面userAgent来选择是否加载vconsole](https://github.com/vadxq/vite-plugin-vconsole/issues/12)
+
+```javascript
+// customHide: 一段可运行代码段，用于出发在浏览器端的一些api
+viteVConsole({
+  entry: path.resolve('src/main.ts'),
+  enabled: true,
+  customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
+  config: {
+    theme: 'dark',
+    onReady() {
+      console.log(23333);
+    }
+  },
+})
+```
+
 ## 配置
 
 ### entry
@@ -241,6 +261,10 @@ viteVConsole({
 }[]
 ```
 
+### customHide
+
+**type:**: String
+
 ## Typescript
 
 添加 `vconsole` 的引用
@@ -269,9 +293,9 @@ viteVConsole({
 
 非常感谢[@KeJunMao](https://github.com/KeJunMao)的支持！
 
-## 支持VConsole自定义插件和配置参数调整
+## 支持VConsole自定义插件和配置参数调整，支持自定义销毁
 
-更新至V2.0.0+版本，可以配置VConsole定义插件啦～
+更新至V2.0.0+版本，可以配置VConsole定义插件啦～同时支持自定义销毁
 
 ## License
 
