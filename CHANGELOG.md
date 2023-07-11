@@ -1,5 +1,15 @@
+## 2.0.0 (2023-07-11)
+
+* feat: add vconsole plugin ([7729422](https://github.com/vadxq/vite-plugin-vconsole/commit/7729422))
+* feat: custom hide ([9c888a5](https://github.com/vadxq/vite-plugin-vconsole/commit/9c888a5))
+* feat: update type and readme ([2acfc1d](https://github.com/vadxq/vite-plugin-vconsole/commit/2acfc1d))
+* fix: change entry file ([9376ec0](https://github.com/vadxq/vite-plugin-vconsole/commit/9376ec0))
+
+
+
 ## <small>1.3.1 (2022-10-20)</small>
 
+* release: v1.3.1 ([6f85d19](https://github.com/vadxq/vite-plugin-vconsole/commit/6f85d19))
 * fix: cjs not found ([c666ca9](https://github.com/vadxq/vite-plugin-vconsole/commit/c666ca9))
 
 
