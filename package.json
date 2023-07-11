@@ -1,13 +1,13 @@
 {
   "name": "vite-plugin-vconsole",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "description": "vite plugin vconsole",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "types": "./dist/main.d.ts",
+      "require": "./dist/main.js",
+      "import": "./dist/main.mjs"
     }
   },
   "files": [
