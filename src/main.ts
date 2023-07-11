@@ -34,7 +34,13 @@ const getEventItems = (
 };
 
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
-  const { entry, enabled = true, config = {}, plugin } = opt;
+  const {
+    entry,
+    enabled = true,
+    config = {},
+    plugin,
+    customHide = false
+  } = opt;
 
   // Compatible to solve the windows path problem
   let entryPath = Array.isArray(entry) ? entry : [entry];
@@ -67,6 +73,9 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
         )}});
         window.vConsole = vConsole;
         ${plugins}
+        if (${customHide}) {
+          vConsole.destroy()
+        }
         /* eslint-enable */${_source}`;
 
         return {

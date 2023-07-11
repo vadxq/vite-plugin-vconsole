@@ -6,6 +6,7 @@ export interface viteVConsoleOptions {
   localEnabled?: boolean; // serve dev enabled
   enabled?: boolean; // enabled
   config?: VConsoleOptions; // vconsole option
+  customHide?: string; // custom hide rule code string
   plugin?: {
     id: string;
     name: string;

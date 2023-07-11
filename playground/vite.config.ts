@@ -8,6 +8,7 @@ export default defineConfig({
     viteVConsole({
       entry: path.resolve('src/main.ts'),
       enabled: true,
+      customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
       config: {
         theme: 'dark',
         onReady() {
