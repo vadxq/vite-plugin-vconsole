@@ -1,5 +1,6 @@
-## 2.0.0 (2023-07-11)
+## <small>2.0.1 (2023-08-23)</small>
 
+* docs: 2.0.0 change log ([b7ed3a3](https://github.com/vadxq/vite-plugin-vconsole/commit/b7ed3a3))
 * feat: add vconsole plugin ([7729422](https://github.com/vadxq/vite-plugin-vconsole/commit/7729422))
 * feat: custom hide ([9c888a5](https://github.com/vadxq/vite-plugin-vconsole/commit/9c888a5))
 * feat: update type and readme ([2acfc1d](https://github.com/vadxq/vite-plugin-vconsole/commit/2acfc1d))
