@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-vconsole",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "description": "vite plugin vconsole",
   "main": "dist/main.js",
   "exports": {
@@ -19,8 +19,7 @@
     "prepare": "husky install",
     "log": "npx conventional-changelog --config ./node_modules/@commitlint/cli -i CHANGELOG.md -s -r 0",
     "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
-    "lint:pretty": "pretty-quick --staged",
-    "preinstall": "npx only-allow pnpm"
+    "lint:pretty": "pretty-quick --staged"
   },
   "repository": {
     "type": "git",
