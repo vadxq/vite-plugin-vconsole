@@ -246,6 +246,23 @@ viteVConsole({
 })
 ```
 
+- Dynamic configuration, see issue requirements: [How to dynamically modify the theme?](https://github.com/vadxq/vite-plugin-vconsole/issues/21)
+
+Please note that the dynamic configuration here has the highest priority, and dynamicConfig will override the configuration in config.
+
+```ts
+// Example, distinguish theme light and dark colors based on class
+// Distinguish black or white based on whether it has a dark class name
+viteVConsole({
+  config: {
+    theme: 'light'
+  },
+  dynamicConfig: {
+    theme: `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
+  }
+})
+```
+
 ## Options
 
 ### entry
@@ -292,6 +309,23 @@ Add a reference to `vconsole`
 /// <reference types="vconsole" />
 ```
 
+### dynamicConfig
+
+Dynamic configuration items, which contain stringified functions. (It is recommended not to use dynamic configuration in production environments)
+
+```ts
+dynamicConfig: {
+  theme?: string;
+  target?: string;
+  defaultPlugins?: string;
+  disableLogScrolling?: boolean;
+  pluginOrder?: string;
+  log?: string;
+  network?: string;
+  storage?: string;
+}
+```
+
 ## Sample project
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
@@ -315,6 +349,10 @@ Many thanks to [@KeJunMao](https://github.com/KeJunMao) for support!
 ## Support VConsole Plugin Configuration.Support custom destruction
 
 Update to V2.0.0+ version, can support VConsole Plugin Configuration.Also supports custom destruction.
+
+## Support VConsole dynamic configuration
+
+Updated to version V2.1.0+, VConsole dynamic configuration can be configured. It can be easily configured to follow theme changes, etc.
 
 ## License
 

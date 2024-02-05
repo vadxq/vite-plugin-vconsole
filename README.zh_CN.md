@@ -227,6 +227,23 @@ viteVConsole({
 })
 ```
 
+- 动态配置，见issue需求：[请问如何动态修改主题？](https://github.com/vadxq/vite-plugin-vconsole/issues/21)
+
+请注意，这里的动态配置优先级最高，dynamicConfig会覆盖config里的配置。
+
+```ts
+// 示例，根据class来区分主题亮色和暗色
+// 根据是否具有dark的class名来区分黑色还是白色
+viteVConsole({
+  config: {
+    theme: 'light'
+  },
+  dynamicConfig: {
+    theme: `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
+  }
+})
+```
+
 ## 配置
 
 ### entry
@@ -265,6 +282,23 @@ viteVConsole({
 
 **type:**: String
 
+### dynamicConfig
+
+动态配置项，里面放字符串化的函数。（建议不在生产环境使用动态配置）
+
+```ts
+dynamicConfig: {
+  theme?: string;
+  target?: string;
+  defaultPlugins?: string;
+  disableLogScrolling?: boolean;
+  pluginOrder?: string;
+  log?: string;
+  network?: string;
+  storage?: string;
+}
+```
+
 ## Typescript
 
 添加 `vconsole` 的引用
@@ -296,6 +330,10 @@ viteVConsole({
 ## 支持VConsole自定义插件和配置参数调整，支持自定义销毁
 
 更新至V2.0.0+版本，可以配置VConsole定义插件啦～同时支持自定义销毁
+
+## 支持VConsole动态配置
+
+更新至V2.1.0+版本，可以配置VConsole动态配置啦。可以方便配置跟随主题变化等。
 
 ## License
 
