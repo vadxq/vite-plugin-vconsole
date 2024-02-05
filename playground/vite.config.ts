@@ -10,11 +10,15 @@ export default defineConfig({
       enabled: true,
       customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
       config: {
-        theme: 'dark',
+        theme: 'light',
+        // theme: () => `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
         onReady() {
           console.log(23333);
         }
       },
+      // dynamicConfig: {
+      //   theme: `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
+      // },
       plugin: [
         {
           id: 'my_plugin',

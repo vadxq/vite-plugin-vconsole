@@ -1,4 +1,7 @@
-import type { viteVConsoleOptions } from './types';
+import type {
+  viteVConsoleDynamicConfigOptions,
+  viteVConsoleOptions
+} from './types';
 import type { Plugin } from 'vite';
 
 const parseVConsoleOptions = (config: Record<string, unknown>) =>
@@ -33,13 +36,28 @@ const getEventItems = (
     .join(';');
 };
 
+const getDynamicConfig = (dynamicConfig?: viteVConsoleDynamicConfigOptions) => {
+  let configString = '';
+  if (!dynamicConfig) {
+    return configString;
+  }
+
+  for (const key in dynamicConfig) {
+    if (typeof dynamicConfig[key] === 'string') {
+      configString += `${key}: ${dynamicConfig[key]},`;
+    }
+  }
+  return configString;
+};
+
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
   const {
     entry,
     enabled = true,
     config = {},
     plugin,
-    customHide = false
+    customHide = false,
+    dynamicConfig = {}
   } = opt;
 
   // Compatible to solve the windows path problem
@@ -66,11 +84,15 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
             )
             .join(';');
         }
+
+        const cfg = `${parseVConsoleOptions(
+          config as Record<string, unknown>
+        )}${getDynamicConfig(dynamicConfig)}`;
+
+        console.log('cfg', cfg);
         const code = `/* eslint-disable */;
         import VConsole from 'vconsole';
-        const vConsole = new VConsole({${parseVConsoleOptions(
-          config as Record<string, unknown>
-        )}});
+        const vConsole = new VConsole({${cfg}});
         window.vConsole = vConsole;
         ${plugins}
         if (${customHide}) {

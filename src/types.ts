@@ -15,4 +15,17 @@ export interface viteVConsoleOptions {
       callback: (data?: any) => void;
     }[];
   }[];
+  dynamicConfig?: viteVConsoleDynamicConfigOptions;
+}
+
+export interface viteVConsoleDynamicConfigOptions {
+  theme?: string;
+  target?: string;
+  defaultPlugins?: string;
+  disableLogScrolling?: boolean;
+  pluginOrder?: string;
+  log?: string;
+  network?: string;
+  storage?: string;
+  [key: string]: any;
 }
