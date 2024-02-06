@@ -1,6 +1,7 @@
 import type {
   viteVConsoleDynamicConfigOptions,
-  viteVConsoleOptions
+  viteVConsoleOptions,
+  viteVConsolePluginItemOptions
 } from './types';
 import type { Plugin } from 'vite';
 
@@ -50,6 +51,22 @@ const getDynamicConfig = (dynamicConfig?: viteVConsoleDynamicConfigOptions) => {
   return configString;
 };
 
+const getPlugins = (plugin?: viteVConsolePluginItemOptions[]) => {
+  let plugins = '';
+  if (plugin && plugin.length) {
+    plugins = plugin
+      .map(
+        (e: viteVConsolePluginItemOptions) => `
+    const ${e.id} = new VConsole.VConsolePlugin('${e.id}', '${e.name}');
+    ${getEventItems(e.event, e.id)}
+    vConsole.addPlugin(${e.id})
+    `
+      )
+      .join(';');
+  }
+  return plugins;
+};
+
 export function viteVConsole(opt: viteVConsoleOptions): Plugin {
   const {
     entry,
@@ -57,7 +74,8 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
     config = {},
     plugin,
     customHide = false,
-    dynamicConfig = {}
+    dynamicConfig = {},
+    eventListener = ''
   } = opt;
 
   // Compatible to solve the windows path problem
@@ -72,32 +90,47 @@ export function viteVConsole(opt: viteVConsoleOptions): Plugin {
     enforce: 'pre',
     transform(_source: string, id: string) {
       if (entryPath.includes(id) && enabledTruly) {
-        let plugins = '';
-        if (plugin && plugin.length) {
-          plugins = plugin
-            .map(
-              (e) => `
-          const ${e.id} = new VConsole.VConsolePlugin('${e.id}', '${e.name}');
-          ${getEventItems(e.event, e.id)}
-          vConsole.addPlugin(${e.id})
-          `
-            )
-            .join(';');
-        }
-
-        const cfg = `${parseVConsoleOptions(
-          config as Record<string, unknown>
-        )}${getDynamicConfig(dynamicConfig)}`;
-
-        console.log('cfg', cfg);
         const code = `/* eslint-disable */;
         import VConsole from 'vconsole';
-        const vConsole = new VConsole({${cfg}});
+        // config
+        const vConsole = new VConsole({${parseVConsoleOptions(
+          config as Record<string, unknown>
+        )}});
         window.vConsole = vConsole;
-        ${plugins}
+
+        // plugins
+        ${getPlugins(plugin)}
+
+        // dynamic config
+        window.vConsole.dynamicFunction = function() {
+          if (${getDynamicConfig(dynamicConfig).length > 0}) {
+            vConsole.setOption({${getDynamicConfig(dynamicConfig)}});
+          }
+        };
+        
+        window.vConsole.dynamicChange = {
+          value: new Date().getTime()
+        };
+
+        window.vConsole.dynamicFunction();
+
         if (${customHide}) {
-          vConsole.destroy()
+          vConsole.hideSwitch();
         }
+
+        // In order to be compatible with old equipment, I used defineProperty. In the future, when proxy covers enough devices, proxy will be used.
+        Object.defineProperty(window.vConsole.dynamicChange, 'value', {
+          get: function() {
+            return this._value;
+          },
+          set: function(newValue) {
+            window.vConsole.dynamicFunction();
+            this._value = newValue;
+          }
+        });
+
+        // eventListener
+        ${eventListener}
         /* eslint-enable */${_source}`;
 
         return {

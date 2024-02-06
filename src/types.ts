@@ -7,15 +7,9 @@ export interface viteVConsoleOptions {
   enabled?: boolean; // enabled
   config?: VConsoleOptions; // vconsole option
   customHide?: string; // custom hide rule code string
-  plugin?: {
-    id: string;
-    name: string;
-    event: {
-      eventName: string;
-      callback: (data?: any) => void;
-    }[];
-  }[];
+  plugin?: viteVConsolePluginItemOptions[];
   dynamicConfig?: viteVConsoleDynamicConfigOptions;
+  eventListener?: string;
 }
 
 export interface viteVConsoleDynamicConfigOptions {
@@ -28,4 +22,13 @@ export interface viteVConsoleDynamicConfigOptions {
   network?: string;
   storage?: string;
   [key: string]: any;
+}
+
+export interface viteVConsolePluginItemOptions {
+  id: string;
+  name: string;
+  event: {
+    eventName: string;
+    callback: (data?: any) => void;
+  }[];
 }

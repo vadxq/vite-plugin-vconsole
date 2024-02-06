@@ -236,7 +236,7 @@ viteVConsole({
 viteVConsole({
   entry: path.resolve('src/main.ts'),
   enabled: true,
-  customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
+  customHide: `/iphone/g.test(navigator.userAgent.toLowerCase())`,
   config: {
     theme: 'dark',
     onReady() {
@@ -250,6 +250,8 @@ viteVConsole({
 
 Please note that the dynamic configuration here has the highest priority, and dynamicConfig will override the configuration in config.
 
+You can provide a stringified runnable function that listens for a parameter as a trigger. Then modify a global variable `window.vConsole.dynamicChange.value`. When this variable changes, the dynamic configuration will take effect again. Here you can combine the above dynamic configuration to dynamically switch themes.
+
 ```ts
 // Example, distinguish theme light and dark colors based on class
 // Distinguish black or white based on whether it has a dark class name
@@ -259,7 +261,37 @@ viteVConsole({
   },
   dynamicConfig: {
     theme: `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
-  }
+  },
+  // If you need to switch themes without refreshing
+  eventListener: `
+    const targetElement = document.querySelector('body'); // Select the element to listen to
+    const observerOptions = {
+      attributes: true, // Listen for property changes
+      attributeFilter: ['class'] // Only monitor class attribute changes
+    };
+
+    // Define callback functions to handle observed changes
+    function handleAttributeChange(mutationsList, observer) {
+      for(let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          console.log('The class attribute was modified.');
+          // Add the code you need to execute here
+          if (window && window.vConsole) {
+            window.vConsole.dynamicChange.value = new Date().getTime();
+          }
+        }
+      }
+    }
+
+    // Create an observer instance and pass in the callback function
+    const observer = new MutationObserver(handleAttributeChange);
+
+    // Start observing the target element
+    observer.observe(targetElement, observerOptions);
+
+    // Stop observing when it is no longer needed
+    // observer.disconnect();
+  `,
 })
 ```
 
@@ -326,6 +358,16 @@ dynamicConfig: {
 }
 ```
 
+Here you can combine the following configurations to dynamically switch themes. Modifying a global variable `window.vConsole.dynamicChange.value` will trigger dynamic configuration reloading without refreshing the page.
+
+### eventListener
+
+You can provide a stringified runnable function that listens for a parameter as a trigger. Then modify a global variable `window.vConsole.dynamicChange.value`. When this variable changes, the dynamic configuration will take effect again. Here you can combine the above dynamic configuration to dynamically switch themes.
+
+```ts
+eventListener?: string
+```
+
 ## Sample project
 
 [vite-vue-prod-template](https://github.com/vadxq/vite-vue-prod-template)
@@ -350,9 +392,9 @@ Many thanks to [@KeJunMao](https://github.com/KeJunMao) for support!
 
 Update to V2.0.0+ version, can support VConsole Plugin Configuration.Also supports custom destruction.
 
-## Support VConsole dynamic configuration
+## Support VConsole dynamic configuration. Support eventListener
 
-Updated to version V2.1.0+, VConsole dynamic configuration can be configured. It can be easily configured to follow theme changes, etc.
+Updated to version V2.1.0+, VConsole dynamic configuration can be configured. and you can give some eventListener code. It can be easily configured to follow theme changes, etc.
 
 ## License
 

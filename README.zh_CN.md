@@ -217,7 +217,7 @@ viteVConsole({
 viteVConsole({
   entry: path.resolve('src/main.ts'),
   enabled: true,
-  customHide: `/chrome\\/([\\d\\.]+)/.test(navigator.userAgent.toLowerCase())`,
+  customHide: `/iphone/g.test(navigator.userAgent.toLowerCase())`,
   config: {
     theme: 'dark',
     onReady() {
@@ -231,6 +231,8 @@ viteVConsole({
 
 请注意，这里的动态配置优先级最高，dynamicConfig会覆盖config里的配置。
 
+你可以提供一段字符串化的可运行函数，监听某个参量作为触发器。然后修改一个全局变量`window.vConsole.dynamicChange.value`。当这个变量发生变化时，动态配置会重新进行生效。这里可以结合上面动态配置做到动态切换主题。
+
 ```ts
 // 示例，根据class来区分主题亮色和暗色
 // 根据是否具有dark的class名来区分黑色还是白色
@@ -240,7 +242,37 @@ viteVConsole({
   },
   dynamicConfig: {
     theme: `document.querySelectorAll('.dark').length ? 'dark' : 'light'`,
-  }
+  },
+  // 如果你需要不刷新切换主题
+  eventListener: `
+    const targetElement = document.querySelector('body'); // 择要监听的元素
+    const observerOptions = {
+      attributes: true, // 监听属性变化
+      attributeFilter: ['class'] // 只监听class属性变化
+    };
+
+    // 定义回调函数来处理观察到的变化
+    function handleAttributeChange(mutationsList, observer) {
+      for(let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          console.log('The class attribute was modified.');
+          // 在这里添加你需要执行的代码
+          if (window && window.vConsole) {
+            window.vConsole.dynamicChange.value = new Date().getTime();
+          }
+        }
+      }
+    }
+
+    // 创建观察者实例并传入回调函数
+    const observer = new MutationObserver(handleAttributeChange);
+
+    // 开始观察目标元素
+    observer.observe(targetElement, observerOptions);
+
+    // 当不再需要观察时，停止观察
+    // observer.disconnect();
+  `,
 })
 ```
 
@@ -299,6 +331,16 @@ dynamicConfig: {
 }
 ```
 
+这里可以结合下面配置进行动态切换主题。修改一个全局变量`window.vConsole.dynamicChange.value`，会触发动态配置重新加载，而不需要刷新页面。
+
+### eventListener
+
+你可以提供一段字符串化的可运行函数，监听某个参量作为触发器。然后修改一个全局变量`window.vConsole.dynamicChange.value`。当这个变量发生变化时，动态配置会重新进行生效。这里可以结合上面动态配置做到动态切换主题。
+
+```ts
+eventListener?: string
+```
+
 ## Typescript
 
 添加 `vconsole` 的引用
@@ -331,9 +373,9 @@ dynamicConfig: {
 
 更新至V2.0.0+版本，可以配置VConsole定义插件啦～同时支持自定义销毁
 
-## 支持VConsole动态配置
+## 支持VConsole动态配置和事件监听
 
-更新至V2.1.0+版本，可以配置VConsole动态配置啦。可以方便配置跟随主题变化等。
+更新至V2.1.0+版本，可以配置VConsole动态配置和提供事件监听的代码啦。可以方便配置跟随主题变化等。
 
 ## License
 
