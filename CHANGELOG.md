@@ -1,9 +1,23 @@
+## <small>2.1.1 (2024-02-06)</small>
+
+* feat: add eventListener ([239b8a1](https://github.com/vadxq/vite-plugin-vconsole/commit/239b8a1))
+
+
+
+## 2.1.0 (2024-02-05)
+
+* docs: v2.1.0 docs ([35a49fb](https://github.com/vadxq/vite-plugin-vconsole/commit/35a49fb))
+* feat: add dynamicConfig ([98513c4](https://github.com/vadxq/vite-plugin-vconsole/commit/98513c4))
+
+
+
 ## <small>2.0.1 (2023-08-23)</small>
 
-* docs: 2.0.0 change log ([b7ed3a3](https://github.com/vadxq/vite-plugin-vconsole/commit/b7ed3a3))
 * feat: add vconsole plugin ([7729422](https://github.com/vadxq/vite-plugin-vconsole/commit/7729422))
+* feat: change package preinstall ([eceb380](https://github.com/vadxq/vite-plugin-vconsole/commit/eceb380))
 * feat: custom hide ([9c888a5](https://github.com/vadxq/vite-plugin-vconsole/commit/9c888a5))
 * feat: update type and readme ([2acfc1d](https://github.com/vadxq/vite-plugin-vconsole/commit/2acfc1d))
+* docs: 2.0.0 change log ([b7ed3a3](https://github.com/vadxq/vite-plugin-vconsole/commit/b7ed3a3))
 * fix: change entry file ([9376ec0](https://github.com/vadxq/vite-plugin-vconsole/commit/9376ec0))
 
 

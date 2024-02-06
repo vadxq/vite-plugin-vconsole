@@ -252,6 +252,8 @@ Please note that the dynamic configuration here has the highest priority, and dy
 
 You can provide a stringified runnable function that listens for a parameter as a trigger. Then modify a global variable `window.vConsole.dynamicChange.value`. When this variable changes, the dynamic configuration will take effect again. Here you can combine the above dynamic configuration to dynamically switch themes.
 
+The reason why this design uses more stringified code is to reduce code intrusion into the production environment.
+
 ```ts
 // Example, distinguish theme light and dark colors based on class
 // Distinguish black or white based on whether it has a dark class name
