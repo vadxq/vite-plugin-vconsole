@@ -54,6 +54,9 @@
     "vconsole": "^3.15.1",
     "vite": "^4.3.9"
   },
+  "peerDependencies": {
+    "vconsole": "^3.15.1"
+  },
   "eslintConfig": {
     "root": true,
     "env": {
