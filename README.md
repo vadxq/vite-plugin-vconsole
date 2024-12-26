@@ -73,7 +73,9 @@ export default defineConfig({
       entry: path.resolve('src/main.ts'), // or you can use entry: [path.resolve('src/main.ts')]
       enabled: true,
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -97,7 +99,9 @@ export default defineConfig({
       entry: [path.resolve('src/main.ts')], // entry for each page, different from the above
       enabled: true,
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -121,7 +125,9 @@ export default defineConfig({
       entry: path.resolve('src/main.tsx'),
       enabled: true,
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -147,7 +153,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         entry: [path.resolve('src/main.ts')], // entry file
         enabled: command !== 'serve' || mode === 'test', // build production
         config: { // vconsole options
-          maxLogNumber: 1000，
+          log: {
+            maxLogNumber: 1000,
+          },
           theme: 'light'
         }
       })

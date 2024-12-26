@@ -75,7 +75,9 @@ export default defineConfig({
       entry: path.resolve('src/main.ts'), // 或者可以使用这个配置: [path.resolve('src/main.ts')]
       enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -99,7 +101,9 @@ export default defineConfig({
       entry: [path.resolve('src/main.ts')], // 每个页面的入口文件，和上面不一样的地方，这里是一个数组
       enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -123,7 +127,9 @@ export default defineConfig({
       entry: path.resolve('src/main.tsx'),
       enabled: true, // 可自行结合 mode 和 command 进行判断
       config: {
-        maxLogNumber: 1000,
+        log: {
+          maxLogNumber: 1000,
+        },
         theme: 'dark'
       }
     })
@@ -148,7 +154,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         entry: [path.resolve('src/main.ts')], // 入口文件
         enabled: command !== 'serve' || mode === 'test', // 打包环境下/发布测试包
         config: { // vconsole 配置项
-          maxLogNumber: 1000，
+          log: {
+            maxLogNumber: 1000,
+          },
           theme: 'light'
         }
       })
